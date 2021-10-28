@@ -1,0 +1,41 @@
+imports:
+  - path: instance-template.jinja
+
+resource:
+# create the auto-mode network
+#
+# gcloud deployment-manager list types | grep <resource type>
+# to get all the resource types supported by deployment manager
+- name: mynetwork
+  type: computer.v1.network
+  properties:
+    autoCreateSubnetworks: true
+
+# firewall rule
+- name: mynetwork-allow-http-ssh-rdp-icmp
+  type: compute.v1.firewall
+  properties:
+    network: $(ref.mynetwork.selfLink)
+    sourceRanges: ["0.0.0.0/0"]
+    allowed:
+      - IPProtocol: TCP
+        ports: [22, 80, 3389]
+      - IPProtocol: ICMP
+
+# create mynet-us-vm instance
+- name: mynet-us-vm
+  type: instance-template.jinja
+  properties:
+    zone: us-central1-a
+    machineType: n1-standard-1
+    network: $(ref.mynetwork.selfLink)
+    subnetwork: regions/us-central1/subnetworks/mynetwork
+
+# create mynet-eu-vm instance
+- name: mynet-eu-vm
+  type: instance-template.jinja
+  properties:
+    zone: europe-west1-d
+    machineType: n1-standard-1
+    network: $(ref.mynetwork.selfLink)
+    subnetwork: regions/europe-west1/subnetworks/mynetwork
