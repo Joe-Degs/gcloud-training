@@ -1,0 +1,14 @@
+terraform init
+
+terraform fmt
+
+terraform apply
+
+terraform validate
+
+terraform plan
+
+mkdir infra && cd tfinfra && nano provider.tf
+nano mynetwork.tf
+
+mkdir instance && cd instance && nano main.tf

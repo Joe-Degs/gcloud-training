@@ -7,7 +7,7 @@ variable "instance_type" {
 resource "google_compute_instance" "vm_instance" {
   name = var.instance_name
   zone = var.instance_zone
-  type = var.instance_type
+  machine_type = var.instance_type
 
   boot_disk {
     initialize_params {
