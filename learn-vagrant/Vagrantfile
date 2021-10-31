@@ -1,0 +1,22 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+#
+
+Vagrant.configure("2") do |config|
+  # the virtual machine image used that is run by vagrant is called a `box`
+  # this means we are running a `bionic x86_64 ubuntu machine` in this instance
+  config.vm.box = "hashicorp/bionic64"
+
+  # provision allows you to specify things that should be done as part of
+  # the startup process of the box.
+  # This particular will use the shell to run the `bootstrap.sh` script as part
+  # of the startup process. this script installs and starts apache web server
+  # on the guest
+  config.vm.provision :shell, path: "bootstrap.sh"
+
+  # network configurability is one of the most important things about vms. And
+  # vagrant has that covered.
+  # In this example we do some simple port forwarding the web server that was
+  # provisioned
+  config.vm.network :forwarded_port, guest: 80, host: 8000
+end
