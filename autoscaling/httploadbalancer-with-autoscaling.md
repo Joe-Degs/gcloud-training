@@ -19,6 +19,6 @@ __Health checks determine which instances of a load balancer can receive new con
 
 ## Task 3
 
-ipv4 = 34.117.186.136:80
-ipv6 = [2600:1901:0:5872::]:80
+- ipv4 = 34.117.186.136:80
+- ipv6 = [2600:1901:0:5872::]:80
 
