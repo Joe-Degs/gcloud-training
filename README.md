@@ -28,7 +28,7 @@ gcloud compute firewall-rules create privatenet-allow-icmp-ssh-rdp \
     --source-ranges=0.0.0.0/0
 ```
 
-- create a vm instance
+- create a more specific vm instance
 ```console
 gcloud compute instances create privatenet-us-vm \
     --zone=us-central1-c \
@@ -83,8 +83,6 @@ gcloud config list
 ```console
 gcloud auth activate-service-account --key-file credentials.json
 ```
-
-
 
 ## Areas of Special Attention
 - StackDriver
